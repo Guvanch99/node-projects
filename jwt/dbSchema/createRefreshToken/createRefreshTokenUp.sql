@@ -1,0 +1,7 @@
+CREATE TABLE refreshtokens(
+	id SERIAL PRIMARY KEY,
+	token TEXT NOT NULL,
+	expires_at TIMESTAMPTZ NOT NULL,
+	user_id INTEGER UNIQUE,
+	CONSTRAINT fk_user_id FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
+ )

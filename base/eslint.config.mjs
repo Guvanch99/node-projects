@@ -52,6 +52,8 @@ export default [
       "prefer-const": "error",
       "prefer-template": "warn"
     },
+    "object-curly-spacing": ["error", "always"],
+    "key-spacing": ["error", { "beforeColon": false, "afterColon": true }]
   },
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
