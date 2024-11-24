@@ -54,7 +54,8 @@ export default [
     },
     "object-curly-spacing": ["error", "always"],
     "key-spacing": ["error", { "beforeColon": false, "afterColon": true }],
-    "@typescript-eslint/no-explicit-any": "off"
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-require-imports": "off"
   },
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
