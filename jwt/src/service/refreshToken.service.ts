@@ -25,6 +25,7 @@ class AuthService {
 
     return userData;
   }
+  
 
   async updateRefreshToken(oldRefreshToken?: string) {
     const userData =  this.validate(oldRefreshToken);

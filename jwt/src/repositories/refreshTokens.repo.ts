@@ -7,7 +7,7 @@ class RefreshTokensRepo {
     const date = new Date();
     date.setHours(date.getHours() + 3);
 
-    return pool.query('INSERT INTO refresh_tokens (expires_at, token, user_id) VALUES ($1, $2, $3)',
+    return pool.query('INSERT INTO refreshtokens (expires_at, token, user_id) VALUES ($1, $2, $3)',
       [date, token, userId]);
   }
   async update(token: string, userId: string) {

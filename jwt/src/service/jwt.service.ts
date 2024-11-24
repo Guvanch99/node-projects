@@ -1,13 +1,18 @@
 import { UserResponseDto } from '../dto/user.dto';
 import jwt from 'jsonwebtoken';
+import dotenv  from 'dotenv';
 
-const secretKey = process.env.SECRET as string;
+dotenv.config();
+
+const secretKey = process.env.SECRET_KEY as string;
 const accessTokenTime = process.env['ACCESS_TOKEN_TIME'] as string;
 const refreshTokenTime = process.env['REFRESH_TOKEN_TIME'] as string;
+
 
 class JwtService {
 
   generateTokens(payload: Omit<UserResponseDto, 'accessToken'|'refreshToken'>) {
+
     const accessToken = jwt.sign(payload, secretKey, { expiresIn: accessTokenTime  });
     const refreshToken = jwt.sign(payload, secretKey, { expiresIn: refreshTokenTime  });
 

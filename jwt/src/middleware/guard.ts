@@ -11,6 +11,4 @@ export const guard = (roles: Role[]) => (req:Request, res:Response, next:NextFun
   } else {
     throw new ForbiddenError('You dont have permission');
   }
-
-
 };

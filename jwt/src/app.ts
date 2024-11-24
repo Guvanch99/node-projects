@@ -1,4 +1,4 @@
-import 'express-async-errors';
+require('express-async-errors');
 import express from 'express';
 import dotenv  from 'dotenv';
 import cookieParser  from 'cookie-parser';
@@ -12,7 +12,7 @@ dotenv.config();
 const app = express();
 
 app.use(express.json());
-app.use(cookieParser());
+app.use(cookieParser(process.env.COOKIE_SECRET as string));
 
 app.use('/api/auth', authRouter);
 app.use(notFound);
