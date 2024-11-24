@@ -3,7 +3,7 @@ import { UnauthorizedError } from '../errors';
 import jwtService from '../service/jwt.service';
 
 export const verifyToken = (req:Request, res:Response, next:NextFunction) => {
-  const token = req.signedCookies.accessToken;
+  const token = req.signedCookies?.accessToken;
 
   if (!token) {
     throw new UnauthorizedError('No token provided');

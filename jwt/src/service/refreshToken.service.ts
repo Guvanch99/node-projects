@@ -11,9 +11,17 @@ class AuthService {
 
     const userData = JwtService.decode(refreshToken);
 
+
     if (!userData) {
       throw new BadRequestError('INVALID TOKEN');
     }
+
+    const isValid = JwtService.verifyToken(refreshToken);
+
+    if (isValid) {
+      throw new BadRequestError('TOKEN NOT EXPIRED');
+    }
+
 
     return userData;
   }
