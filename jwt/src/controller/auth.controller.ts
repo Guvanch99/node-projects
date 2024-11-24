@@ -24,7 +24,11 @@ class AuthController {
 
   async updateUser(req: TypedRequestBody<IUserUpdateData>, res: Response) {
     const user = await AuthService.update(req.body);
-    return res.status(StatusCodes.OK).json(new UserResponseDto(user));
+    const accessToken = (req as any).signedCookies.accessToken;
+    const refreshToken = (req as any).signedCookies.refreshToken;
+    return res.status(StatusCodes.OK).json(new UserResponseDto(
+      { ...user, accessToken, refreshToken }
+    ));
   }
 
   async signUp(req: TypedRequestBody<IUserSignUpData>, res: Response) {
