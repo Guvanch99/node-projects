@@ -52,7 +52,8 @@ export default [
       "prefer-const": "error",
       "prefer-template": "warn",
       "object-curly-spacing": ["error", "always"],
-      "key-spacing": ["error", { "beforeColon": false, "afterColon": true }]
+      "key-spacing": ["error", { "beforeColon": false, "afterColon": true }],
+      "@typescript-eslint/no-explicit-any": "off"
     },
   },
   pluginJs.configs.recommended,
