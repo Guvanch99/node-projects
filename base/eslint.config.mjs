@@ -3,6 +3,8 @@ import pluginJs from "@eslint/js";
 import tseslint from "typescript-eslint";
 
 export default [
+  pluginJs.configs.recommended,
+  ...tseslint.configs.recommended,
   {
     files: ["**/*.{js,mjs,cjs,ts}"],
     languageOptions: { globals: globals.node },
@@ -50,13 +52,12 @@ export default [
       "no-var": "error",
       "object-shorthand": "off",
       "prefer-const": "error",
-      "prefer-template": "warn"
+      "prefer-template": "warn",
+      "object-curly-spacing": ["error", "always"],
+      "key-spacing": ["error", { "beforeColon": false, "afterColon": true }],
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-require-imports": "off"
     },
-    "object-curly-spacing": ["error", "always"],
-    "key-spacing": ["error", { "beforeColon": false, "afterColon": true }],
-    "@typescript-eslint/no-explicit-any": "off",
-    "@typescript-eslint/no-require-imports": "off"
   },
-  pluginJs.configs.recommended,
-  ...tseslint.configs.recommended,
+
 ];

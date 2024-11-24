@@ -12,7 +12,7 @@ import RefreshTokenService from '../service/refreshToken.service';
 class AuthController {
 
   async logout(req: Request, res: Response) {
-    await AuthService.logout(res);
+    await AuthService.logout(req, res);
     res.status(StatusCodes.OK).json({ msg: 'Successfully logged out' });
   }
 

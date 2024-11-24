@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import { CustomError } from '../errors/customError';
 import { StatusCodes } from 'http-status-codes';
 
 interface IError{

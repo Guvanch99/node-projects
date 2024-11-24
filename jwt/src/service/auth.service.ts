@@ -1,9 +1,10 @@
-import { Response } from 'express';
+import { Response, Request } from 'express';
 import { IUserLoginData, IUserSignUpData, IUserUpdateData } from '../types/user';
 import { BadRequestError } from '../errors';
 import UserRepo from '../repositories/user.repo';
 import bcrypt from 'bcryptjs';
 import CookieService from './cookie.service';
+import RefreshTokensRepo from '../repositories/refreshTokens.repo';
 
 class AuthService {
 
@@ -62,9 +63,10 @@ class AuthService {
     return user.rows[0];
 
   }
-  async logout(res: Response) {
+  async logout(req:Request, res: Response) {
     CookieService.removeCookies({ res,  key: 'accessToken'  });
     CookieService.removeCookies({ res,  key: 'refreshToken' });
+    await RefreshTokensRepo.delete(req.signedCookies.refreshToken.id);
   }
 }
 
