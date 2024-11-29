@@ -9,7 +9,7 @@ const router = Router();
 
 router.post('/login',  AuthController.login);
 router.post('/sign-up', AuthController.signUp);
-router.post('/update',verifyToken, guard([Role.USER]), AuthController.updateUser);
+router.post('/update', verifyToken, guard([Role.USER]), AuthController.updateUser);
 router.post('/refresh-token',verifyToken, AuthController.refreshToken);
 router.post('/logout', AuthController.logout);
 

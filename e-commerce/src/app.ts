@@ -3,7 +3,7 @@ import express from 'express';
 import dotenv  from 'dotenv';
 import cookieParser  from 'cookie-parser';
 import { pool } from './db/pool';
-import { authRouter } from './route';
+import { authRouter, productRouter } from './route';
 import { notFound } from './middleware/notFoundMiddleware';
 import { errorHandlerMiddleware } from './middleware/errorHandlerMiddleware';
 
@@ -15,6 +15,7 @@ app.use(express.json());
 app.use(cookieParser(process.env.COOKIE_SECRET as string));
 
 app.use('/api/auth', authRouter);
+app.use('/api/product', productRouter);
 app.use(notFound);
 app.use(errorHandlerMiddleware);
 

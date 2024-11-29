@@ -26,7 +26,6 @@ class UserRepo {
 
     return pool.query<IUserRepo>('SELECT * FROM users WHERE id=$1', [userData.id]);
   }
-
 }
 
 export default new UserRepo();

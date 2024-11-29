@@ -33,7 +33,6 @@ class AuthController {
 
   async login(req: TypedRequestBody<IUserLoginData>, res: Response) {
     const user = await AuthService.login(req.body, res);
-
     return res.status(StatusCodes.OK).json(new UserResponseDto(user));
   }
 

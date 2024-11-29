@@ -14,7 +14,7 @@ class Pool {
     }
   }
 
-  async query<T extends QueryResultRow>(query: string, p0: (string| Date)[]) {
+  async query<T extends QueryResultRow>(query: string, p0?: (string| Date)[]) {
     return this.pool!.query<T>(query, p0);
   }
 

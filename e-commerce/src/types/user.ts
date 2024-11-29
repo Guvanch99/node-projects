@@ -21,6 +21,11 @@ export interface IUserLoginData{
   password: string
 }
 
+export interface IUserResetPassword{
+  oldPassword: string
+  password: string
+}
+
 export interface IUserUpdateData{
   id: string
   username: string,

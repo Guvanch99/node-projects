@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { IUserLoginData, IUserSignUpData, IUserUpdateData } from '../types/user';
+import { IUserLoginData, IUserResetPassword, IUserSignUpData, IUserUpdateData } from '../types/user';
 import { BadRequestError } from '../errors';
 import UserRepo from '../repositories/user.repo';
 import bcrypt from 'bcryptjs';
@@ -7,6 +7,7 @@ import CookieService from './cookie.service';
 import RefreshTokensRepo from '../repositories/refreshTokens.repo';
 import JwtService from './jwt.service';
 import { UserResponseDto } from '../dto/user.dto';
+import { TypedRequestBody } from '../types/global';
 
 class AuthService {
 
@@ -78,6 +79,35 @@ class AuthService {
     return preparedUser;
 
   }
+
+  async resetPassword(req: TypedRequestBody<IUserResetPassword>, res: Response) {
+    const user = req.user;
+    if (!user) {
+      throw  new  BadRequestError('User not found');
+    }
+
+    const { rows } = await UserRepo.getUserByEmail(user.email);
+
+    const { password, id, username } = rows[0];
+
+    const isOldPasswordIsEqualToCurrent = bcrypt.compare(req.body.oldPassword, password);
+
+    if (!isOldPasswordIsEqualToCurrent) {
+      throw new BadRequestError('Credentials is not correct');
+    }
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+
+    const updatedUser = await UserRepo.update({
+      id: id.toString(),
+      username,
+      password: hashedPassword
+    });
+
+    await RefreshTokensRepo.delete((req as any).signedCookies.refreshToken.id);
+
+    this.setTokens(updatedUser.rows[0], res);
+  }
+
   async logout(req:Request, res: Response) {
     CookieService.removeCookies({ res,  key: 'accessToken'  });
     CookieService.removeCookies({ res,  key: 'refreshToken' });
