@@ -13,3 +13,12 @@ export interface IProductResponse{
   category_id: number
   image_url: string
 }
+
+
+export interface ICategoryWithSubCategoryResponse{
+   id: number;
+   name: string;
+   parent_category: number;
+   parent_name: string;
+   parent_id: number;
+}

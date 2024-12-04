@@ -16,9 +16,14 @@ class ProductController {
   }
 
   async allProducts(req: Request, res:Response) {
-    // const { rows } = await ProductService.allProducts();
-    // const productDtos = rows.map(row => new ProductResponseDto(row));
-    return res.status(200).json([]);
+    const { rows } = await ProductService.allProducts();
+    const productDtos = rows.map(row => new ProductResponseDto(row));
+    return res.status(200).json(productDtos);
+  }
+
+  async withSubCategory(req: Request, res:Response) {
+    const withSubCategory = await ProductService.categoryWithSubCategories();
+    return res.status(200).json(withSubCategory);
   }
 
 }
