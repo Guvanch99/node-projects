@@ -1,5 +1,4 @@
-import AuthService from '../service/auth.service';
-import { Request, Response } from 'express';
+import { Response } from 'express';
 import { TypedRequestBody } from '../types/global';
 import { StatusCodes } from 'http-status-codes';
 import LikeService from '../service/like.service';
