@@ -12,6 +12,11 @@ class ProductController {
     await ProductService.removeImage(req.body.id);
     return res.status(200).json({ message: 'ok' });
   }
+
+  async getSignedUrl(req: Request, res: Response) {
+    const signedUrl = ProductService.signedUrl();
+    return res.status(200).json({ url: signedUrl });
+  }
 }
 
 export default new ProductController();

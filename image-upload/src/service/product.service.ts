@@ -42,6 +42,16 @@ class ProductService {
     return await s3.upload(params).promise();
   }
 
+  async signedUrl() {
+    const fileKey = `${crypto.randomUUID()}-profile-image`;
+    await s3.getSignedUrlPromise('putObject', {
+      Bucket: process.env.AWS_S3_BUCKET_NAME as string,
+      ContentType: 'png',
+      Key: fileKey
+    });
+
+  }
+
 }
 
 export default new ProductService();
