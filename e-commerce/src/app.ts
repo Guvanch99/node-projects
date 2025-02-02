@@ -3,9 +3,10 @@ import express from 'express';
 import dotenv  from 'dotenv';
 import cookieParser  from 'cookie-parser';
 import { pool } from './db/pool';
-import { authRouter, likeRouter, orderRouter, productRouter, reviewRouter } from './route';
+import { authRouter, likeRouter, orderRouter, productRouter, bannerRouter, reviewRouter } from './route';
 import { notFound } from './middleware/notFoundMiddleware';
 import { errorHandlerMiddleware } from './middleware/errorHandlerMiddleware';
+import './jobs/cleanUpBanners';
 
 
 dotenv.config();
@@ -16,6 +17,7 @@ app.use(cookieParser(process.env.COOKIE_SECRET as string));
 
 app.use('/api/auth', authRouter);
 app.use('/api/product', productRouter);
+app.use('/api/banner', bannerRouter);
 app.use('/api/order', orderRouter);
 app.use('/api/like', likeRouter);
 app.use('/api/review', reviewRouter);

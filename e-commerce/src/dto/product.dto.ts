@@ -3,11 +3,12 @@ import { ICategoryWithSubCategoryResponse, IMenu, IProductResponse } from '../ty
 export class MenuResponseDto {
   public name: string;
   public parentCategory: null;
+  public id: number;
 
   constructor(model: IMenu) {
     this.name = model.name;
     this.parentCategory = model.parent_category;
-
+    this.id = model.id;
   }
 }
 

@@ -1,6 +1,7 @@
 export interface IMenu{
   name: string
   parent_category: null
+  id: number
 }
 
 export interface IProductResponse{
