@@ -17,8 +17,8 @@ class RefreshTokensRepo {
     return pool.query('UPDATE refresh_tokens SET expires_at=$1, token=$2 WHERE user_id=$3', [date, token, userId ]);
   }
 
-  async delete(id: string) {
-    return pool.query('DELETE FROM refreshTokens WHERE id=$1', [id]);
+  async delete(userId: string) {
+    return pool.query('DELETE FROM refresh_tokens WHERE user_id=$1', [userId]);
   };
 
 }

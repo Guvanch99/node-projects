@@ -8,6 +8,7 @@ import RefreshTokensRepo from '../repositories/refreshTokens.repo';
 import JwtService from './jwt.service';
 import { UserResponseDto } from '../dto/user.dto';
 import { TypedRequestBody } from '../types/global';
+import jwtService from './jwt.service';
 
 class AuthService {
 
@@ -109,9 +110,13 @@ class AuthService {
   }
 
   async logout(req:Request, res: Response) {
-    CookieService.removeCookies({ res,  key: 'accessToken'  });
-    CookieService.removeCookies({ res,  key: 'refreshToken' });
-    await RefreshTokensRepo.delete(req.signedCookies.refreshToken.id);
+    const userData =  jwtService.decode(req.signedCookies.refreshToken);
+    console.log(userData);
+    if (userData) {
+      CookieService.removeCookies({ res,  key: 'accessToken'  });
+      CookieService.removeCookies({ res,  key: 'refreshToken' });
+      await RefreshTokensRepo.delete(userData.id.toString());
+    }
   }
 
   setTokens(user: UserResponseDto, res:Response) {
