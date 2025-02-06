@@ -104,7 +104,7 @@ class AuthService {
       password: hashedPassword
     });
 
-    await RefreshTokensRepo.delete((req as any).signedCookies.refreshToken.id);
+    await RefreshTokensRepo.delete(user.id.toString());
 
     this.setTokens(updatedUser.rows[0], res);
   }

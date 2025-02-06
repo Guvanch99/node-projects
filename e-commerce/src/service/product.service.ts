@@ -4,8 +4,8 @@ import { CategoryWithSubCategoryDto } from '../dto/product.dto';
 
 class ProductService {
 
-  async menu() {
-    return await ProductRepo.getParentCategory();
+  async menu(isHiddenCategories?: boolean) {
+    return await ProductRepo.getParentCategory(isHiddenCategories);
   }
 
   async productsByCategories(categoryId?: string) {
@@ -21,8 +21,8 @@ class ProductService {
     return await ProductRepo.getAllProducts();
   }
 
-  async categoryWithSubCategories() {
-    const result = await ProductRepo.getCategoryWithSubCategory();
+  async categoryWithSubCategories(isHiddenCategories?: boolean) {
+    const result = await ProductRepo.getCategoryWithSubCategory(isHiddenCategories);
 
     const categoryWithSubCategories = result.rows;
 

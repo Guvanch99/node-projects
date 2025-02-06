@@ -4,7 +4,7 @@ import { Router } from 'express';
 import BannerController from '../controller/banner.controller';
 const router = Router();
 
-router.post('/', BannerController.banners);
+router.get('/', BannerController.banners);
 
 
 export default router;
