@@ -111,7 +111,6 @@ class AuthService {
 
   async logout(req:Request, res: Response) {
     const userData =  jwtService.decode(req.signedCookies.refreshToken);
-    console.log(userData);
     if (userData) {
       CookieService.removeCookies({ res,  key: 'accessToken'  });
       CookieService.removeCookies({ res,  key: 'refreshToken' });
